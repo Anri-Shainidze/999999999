@@ -18,6 +18,7 @@ import { AdminGuard } from 'src/guard-expense/guard-header.guard';
 export class ExpensesController {
   constructor(private readonly expenseService: ExpensesService) {}
 
+  @Delete(':id')
   @Post()
   @UseGuards(AdminGuard)
   create(@Body() expense: CreateExpenseDto) {
@@ -30,15 +31,13 @@ export class ExpensesController {
     return this.expenseService.getAll();
   }
 
+
+
+
   @Put(':id')
   @UseGuards(AdminGuard)
   updateExpense(@Param('id') id: string, @Body() expense: CreateExpenseDto) {
     return this.expenseService.updateExpense(id, expense);
   }
 
-  @Delete(':id')
-  @UseGuards(AdminGuard)
-  deleteExpense(@Param('id') id: string) {
-    return this.expenseService.deleteExpense(id);
-  }
 }
